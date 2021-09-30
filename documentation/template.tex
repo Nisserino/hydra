@@ -1,0 +1,55 @@
+\documentclass{article}
+
+\usepackage{markdown}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+%%%%% Custom commands %%%%%
+
+% Custom title setup
+\newcommand{\mytitle}[3]{
+  \title{\textbf{#1} \\ \href{#2}{#3}}
+}
+
+\newcommand{\start}[1]{
+  \maketitle
+  \begin{abstract}
+  #1
+  \end{abstract}
+  \tableofcontents
+}
+
+
+
+%%%%% Setup %%%%%%
+\markdownSetup{
+  renderers = {
+    link     = {\href{#2}{#1}},        % Render a link as href.
+    emphasis = {\emph{#1}},            % Render emphasis using `\emph`.
+  },
+  smartEllipses = true,
+  fencedCode = true,
+  inlineFootnotes = true,
+  pipeTables=true,
+  tableCaptions=true,
+}
+
+%Roomname, link to room, linktext
+\mytitle{Hydra Documentation}{https://oumph.jls-sto1.elastx.net/index.php/apps/files/?dir=/Projekt/Hydra&fileid=96}{ownCloud}
+\author{
+  Rasmus N, Leo B, Philip B, Shenée B, Sebastian H}
+\date{\today{}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+\start{
+Documentation for OUMPH cloudification
+
+Write more smart stuff here!
+}
+
+% \markdownInput{task1.md}
+
+\end{document}
