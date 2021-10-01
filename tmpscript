@@ -1,0 +1,10 @@
+#!/bin/bash
+
+openstack network create tmp
+
+openstack subnet create subbisv3 --network tmp --subnet-range 192.168.2.0/24 --allocation-pool start=192.168.2.100,end=192.168.2.254 --dns-nameserver 8.8.8.8
+
+openstack security group create foo
+openstack security group rule create foo --description SSH --dst-port 22 --protocol TCP
+openstack router add subnet Router subbisv3
+openstack server create bar --flavor v1-mini-1 --image ubuntu-20.04-server-latest --network tmp --security-group foo --key-name nisseburk 
