@@ -1,0 +1,21 @@
+Projektbeskrivning
+  Vad gick bra?
+  Vad kunde gått bättre?
+    Vi kunde skippat gui (subnätsskapandet var ett waste of time(typ, man lärde ju sig lite ändå))
+  Vad har vi lärt oss?
+    terraform
+    openstack cli
+    slowasshitGUI
+    cloud mot hårdvaru-skillnader i setup
+
+lista instanser
+  vmserver 1
+  vmserver 2
+
+  dbserver 1
+  dbserver 2
+
+  ...
+
+Network topology
+  Fixa ny som är mer in-line med cloud
