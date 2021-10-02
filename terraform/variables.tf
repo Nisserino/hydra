@@ -1,9 +1,13 @@
 ## VARIABLES
 # Make changes here
 
-variable "instance_name" {
+variable "VmServer1" {
   type    = string
-  default = "tf-web"
+  default = "VmServer1"
+}
+variable "VmServer2" {
+  type    = string
+  default = "VmServer2"
 }
 
 variable "image_name" {
@@ -21,19 +25,33 @@ variable "key_name" {
   default = "nisseburk"
 }
 
-variable "network_name" {
+variable "network1" {
   type    = string
-  default = "tf_network"
+  default = "tf-test1"
 }
 
-variable "subnet_name" {
+variable "subnet_name1" {
   type    = string
-  default = "tf_subnet_1"
+  default = "tf-test-sub1"
+}
+variable "network2" {
+  type    = string
+  default = "tf-test2"
 }
 
-variable "subnet_cidr" {
+variable "subnet_name2" {
   type    = string
-  default = "192.168.199.0/24"
+  default = "tf-test-sub2"
+}
+
+variable "subnet_cidr1" {
+  type    = string
+  default = "192.168.0.0/24"
+}
+
+variable "subnet_cidr2" {
+  type    = string
+  default = "192.168.1.0/24"
 }
 
 variable "dns_ip" {
@@ -41,9 +59,14 @@ variable "dns_ip" {
   default = [ "8.8.8.8", "8.8.4.4" ]
 }
 
-variable "port_ip" {
+variable "port_ip_vm1" {
   type    = string
-  default = "192.168.199.10"
+  default = "192.168.0.10"
+}
+
+variable "port_ip_vm2" {
+  type    = string
+  default = "192.168.1.10"
 }
 
 variable "router_id" {

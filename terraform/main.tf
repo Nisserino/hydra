@@ -23,15 +23,27 @@ provider "openstack" {
 ## NETWORK
 # Create network
 resource "openstack_networking_network_v2" "network_1" {
-  name                = var.network_name
+  name                = var.network1
+  admin_state_up      = "true"
+}
+
+resource "openstack_networking_network_v2" "network_2" {
+  name                = var.network2
   admin_state_up      = "true"
 }
 
 # Create subnet
 resource "openstack_networking_subnet_v2" "subnet_1" {
-  name                = var.subnet_name
+  name                = var.subnet_name1
   network_id          = "${openstack_networking_network_v2.network_1.id}"
-  cidr                = var.subnet_cidr
+  cidr                = var.subnet_cidr1
+  ip_version          = 4
+  dns_nameservers     = var.dns_ip
+}
+resource "openstack_networking_subnet_v2" "subnet_2" {
+  name                = var.subnet_name2
+  network_id          = "${openstack_networking_network_v2.network_2.id}"
+  cidr                = var.subnet_cidr2
   ip_version          = 4
   dns_nameservers     = var.dns_ip
 }
@@ -77,7 +89,18 @@ resource "openstack_networking_port_v2" "port_1" {
 
   fixed_ip {
     subnet_id         = "${openstack_networking_subnet_v2.subnet_1.id}"
-    ip_address        = var.port_ip
+    ip_address        = var.port_ip_vm1
+  }
+}
+resource "openstack_networking_port_v2" "port_2" {
+  name                = "port_2"
+  network_id          = "${openstack_networking_network_v2.network_2.id}"
+  admin_state_up      = "true"
+  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
+
+  fixed_ip {
+    subnet_id         = "${openstack_networking_subnet_v2.subnet_2.id}"
+    ip_address        = var.port_ip_vm2
   }
 }
 
@@ -85,6 +108,11 @@ resource "openstack_networking_port_v2" "port_1" {
 resource "openstack_networking_router_interface_v2" "router_interface_1" {
   router_id           = var.router_id
   subnet_id           = "${openstack_networking_subnet_v2.subnet_1.id}"
+}
+
+resource "openstack_networking_router_interface_v2" "router_interface_2" {
+  router_id           = var.router_id
+  subnet_id           = "${openstack_networking_subnet_v2.subnet_2.id}"
 }
 
 # Allocate Floating IP
@@ -95,7 +123,7 @@ resource "openstack_networking_floatingip_v2" "floatip_1" {
 ## INSTANCE
 # Create an instance
 resource "openstack_compute_instance_v2" "instance_1" {
-  name                = var.instance_name
+  name                = var.VmServer1
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
@@ -104,6 +132,19 @@ resource "openstack_compute_instance_v2" "instance_1" {
 
   network {
     port              = "${openstack_networking_port_v2.port_1.id}"
+  }
+}
+
+resource "openstack_compute_instance_v2" "instance_2" {
+  name                = var.VmServer2
+  image_name          = var.image_name
+  flavor_name         = var.flavor_name
+  key_pair            = var.key_name
+  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
+  user_data           = var.cloudconfig_web
+
+  network {
+    port              = "${openstack_networking_port_v2.port_2.id}"
   }
 }
 
