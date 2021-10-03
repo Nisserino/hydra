@@ -5,9 +5,40 @@ variable "VmServer1" {
   type    = string
   default = "VmServer1"
 }
+
 variable "VmServer2" {
   type    = string
   default = "VmServer2"
+}
+
+variable "DbServer1" {
+  type    = string
+  default = "DbServer1"
+}
+
+variable "DbServer2" {
+  type    = string
+  default = "DbServer2"
+}
+
+variable "FileServer1" {
+  type    = string
+  default = "FileServer1"
+}
+
+variable "FileServer2" {
+  type    = string
+  default = "FileServer2"
+}
+
+variable "NAS" {
+  type    = string
+  default = "NAS"
+}
+
+variable "web" {
+  type    = string
+  default = "Web"
 }
 
 variable "image_name" {
@@ -27,32 +58,108 @@ variable "key_name" {
 
 variable "network1" {
   type    = string
-  default = "tf-test1"
+  default = "DMZ"
 }
 
-variable "subnet_name1" {
-  type    = string
-  default = "tf-test-sub1"
-}
+    variable "subnet_name1" {
+      type    = string
+      default = "DMZ"
+    }
+
+    variable "subnet_cidr1" {
+      type    = string
+      default = "192.168.1.0/24"
+    }
+
 variable "network2" {
   type    = string
-  default = "tf-test2"
+  default = "Film/foto"
 }
 
-variable "subnet_name2" {
+    variable "subnet_name2" {
+      type    = string
+      default = "Film/foto"
+    }
+
+    variable "subnet_cidr2" {
+      type    = string
+      default = "192.168.2.0/24"
+    }
+
+variable "network3" {
   type    = string
-  default = "tf-test-sub2"
+  default = "HR/ekonomi"
 }
 
-variable "subnet_cidr1" {
+    variable "subnet_name3" {
+      type    = string
+      default = "HR/ekonomi"
+    }
+
+    variable "subnet_cidr3" {
+      type    = string
+      default = "192.168.3.0/24"
+    }
+
+variable "network4" {
   type    = string
-  default = "192.168.0.0/24"
+  default = "R&D"
 }
 
-variable "subnet_cidr2" {
+    variable "subnet_name4" {
+      type    = string
+      default = "R&D"
+    }
+
+    variable "subnet_cidr4" {
+      type    = string
+      default = "192.168.4.0/24"
+    }
+
+variable "network5" {
   type    = string
-  default = "192.168.1.0/24"
+  default = "IT-admin"
 }
+
+    variable "subnet_name5" {
+      type    = string
+      default = "IT-admin"
+    }
+
+    variable "subnet_cidr5" {
+      type    = string
+      default = "192.168.5.0/24"
+    }
+
+variable "network6" {
+  type    = string
+  default = "SAN 1"
+}
+
+    variable "subnet_name6" {
+      type    = string
+      default = "SAN 1"
+    }
+
+    variable "subnet_cidr6" {
+      type    = string
+      default = "192.168.6.0/24"
+    }
+
+variable "network7" {
+  type    = string
+  default = "SAN 2"
+}
+
+    variable "subnet_name7" {
+      type    = string
+      default = "SAN 2"
+    }
+
+    variable "subnet_cidr7" {
+      type    = string
+      default = "192.168.7.0/24"
+    }
 
 variable "dns_ip" {
   type    = list(string)
@@ -61,12 +168,42 @@ variable "dns_ip" {
 
 variable "port_ip_vm1" {
   type    = string
-  default = "192.168.0.10"
+  default = "192.168.6.50"
 }
 
 variable "port_ip_vm2" {
   type    = string
-  default = "192.168.1.10"
+  default = "192.168.7.50"
+}
+
+variable "port_ip_db1" {
+  type    = string
+  default = "192.168.6.51"
+}
+
+variable "port_ip_db2" {
+  type    = string
+  default = "192.168.7.51"
+}
+
+variable "port_ip_fs1" {
+  type    = string
+  default = "192.168.6.52"
+}
+
+variable "port_ip_fs2" {
+  type    = string
+  default = "192.168.7.52"
+}
+
+variable "port_ip_nas" {
+  type    = string
+  default = "192.168.5.50"
+}
+
+variable "port_ip_web" {
+  type    = string
+  default = "192.168.1.50"
 }
 
 variable "router_id" {
