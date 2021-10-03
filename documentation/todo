@@ -19,3 +19,7 @@ lista instanser
 
 Network topology
   Fixa ny som är mer in-line med cloud
+
+
+Replication (failover) 
+  create failover for:  san, fileserver, calender suite, "cloud" and videohost serv
