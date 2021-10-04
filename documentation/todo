@@ -19,7 +19,17 @@ lista instanser
 
 Network topology
   Fixa ny som är mer in-line med cloud
+  iptables
 
+Security groups
+  DMZ (web)
+  VMservrar
+  Fileservers
+  DBservrar
+  NAS
+ 
+Fråga lärare
+  Replication (failover) 
+    create failover for:  san, fileserver, calender suite, "cloud" and videohost serv
 
-Replication (failover) 
-  create failover for:  san, fileserver, calender suite, "cloud" and videohost serv
+  iptables på burk? eller funkar sec-groups hela vägen?
