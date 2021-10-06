@@ -178,13 +178,13 @@ resource "openstack_networking_port_v2" "port_3" {
 ## SAN 2 network
 resource "openstack_networking_port_v2" "port_4" {
   name                = "port_4"
-  network_id          = "${openstack_networking_network_v2.network_7.id}"
+  network_id          = "${openstack_networking_network_v2.network_5.id}"
   admin_state_up      = "true"
   security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
 
   fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnet_7.id}"
-    ip_address        = var.port_ip_vm2
+    subnet_id         = "${openstack_networking_subnet_v2.subnet_5.id}"
+    ip_address        = var.port_ip_ansibleMaster
   }
 }
 resource "openstack_networking_port_v2" "port_5" {
@@ -313,9 +313,9 @@ resource "openstack_compute_instance_v2" "instance_3" {
     port              = "${openstack_networking_port_v2.port_3.id}"
   }
 }
-# SAN 2
+# Admin
 resource "openstack_compute_instance_v2" "instance_4" {
-  name                = var.VmServer2
+  name                = var.AnsibleMaster
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
@@ -326,6 +326,7 @@ resource "openstack_compute_instance_v2" "instance_4" {
     port              = "${openstack_networking_port_v2.port_4.id}"
   }
 }
+# SAN 2
 resource "openstack_compute_instance_v2" "instance_5" {
   name                = var.DbServer2
   image_name          = var.image_name

@@ -6,9 +6,9 @@ variable "VmServer1" {
   default = "VmServer1"
 }
 
-variable "VmServer2" {
+variable "AnsibleMaster" {
   type    = string
-  default = "VmServer2"
+  default = "AnsibleMaster"
 }
 
 variable "DbServer1" {
@@ -171,9 +171,9 @@ variable "port_ip_vm1" {
   default = "192.168.6.50"
 }
 
-variable "port_ip_vm2" {
+variable "port_ip_ansibleMaster" {
   type    = string
-  default = "192.168.7.50"
+  default = "192.168.5.51"
 }
 
 variable "port_ip_db1" {
