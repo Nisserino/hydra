@@ -21,6 +21,20 @@ Network topology
   Fixa ny som är mer in-line med cloud
   iptables
 
+Dockerimages:
+  Nextcloud
+    calendar
+    filserver
+
+  Matrix
+    Jitsi
+
+  Jellyfin/or other streaming
+    
+Standalone 
+  Prometheus
+    Graphana
+
 Security groups
   DMZ (web)
   VMservrar
