@@ -53,7 +53,7 @@ variable "flavor_name" {
 
 variable "key_name" {
   type    = string
-  default = "nisseburk"
+  default = "Nietzsche"
 }
 
 variable "network1" {
@@ -232,3 +232,28 @@ packages:
  - nginx
 EOF
 }
+
+variable "cloudconfig_AnsibleMaster" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: nisse
+packages:
+ - ansible
+EOF
+}
+
+variable "cloudconfig_VmServer" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: nisse
+packages:
+ - docker
+EOF
+}
+

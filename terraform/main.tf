@@ -274,6 +274,10 @@ resource "openstack_networking_floatingip_v2" "floatip_1" {
   pool                = var.fip_pool
 }
 
+resource "openstack_networking_floatingip_v2" "floatip_2" {
+  pool                = var.fip_pool
+}
+
 ## INSTANCE
 # Create an instance
 ## SAN 1
@@ -320,7 +324,7 @@ resource "openstack_compute_instance_v2" "instance_4" {
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
   security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
-  user_data           = var.cloudconfig_web
+  user_data           = var.cloudconfig_AnsibleMaster
 
   network {
     port              = "${openstack_networking_port_v2.port_4.id}"
@@ -382,4 +386,8 @@ resource "openstack_compute_instance_v2" "instance_8" {
 resource "openstack_networking_floatingip_associate_v2" "fip_1" {
   floating_ip         = "${openstack_networking_floatingip_v2.floatip_1.address}"
   port_id             = "${openstack_networking_port_v2.port_8.id}"
+}
+resource "openstack_networking_floatingip_associate_v2" "fip_2" {
+  floating_ip         = "${openstack_networking_floatingip_v2.floatip_2.address}"
+  port_id             = "${openstack_networking_port_v2.port_4.id}"
 }
