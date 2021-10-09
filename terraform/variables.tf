@@ -1,44 +1,31 @@
 ## VARIABLES
 # Make changes here
 
-variable "VmServer1" {
-  type    = string
-  default = "VmServer1"
+variable "instances_name" {
+type      = list(string)
+default = [
+    "VmServer1",
+    "AnsibleMaster",
+    "DbServer1",
+    "DbServer2",
+    "FileServer1",
+    "FileServer2",
+    "NAS",
+    "web"
+  ]
 }
 
-variable "VmServer2" {
-  type    = string
-  default = "VmServer2"
+variable "networks" {
+type = map(string)
+default = {
+"DMZ" = "192.168.1.0/24",
+"Film/foto" = "192.168.2.0/24",
+"HR/ekonomi" = "192.168.3.0/24",
+"R&D" = "192.168.4.0/24",
+"IT-admin" = "192.168.5.0/24",
+"SAN 1" = "192.168.6.0/24",
+"SAN 2" = "192.168.7.0/24",
 }
-
-variable "DbServer1" {
-  type    = string
-  default = "DbServer1"
-}
-
-variable "DbServer2" {
-  type    = string
-  default = "DbServer2"
-}
-
-variable "FileServer1" {
-  type    = string
-  default = "FileServer1"
-}
-
-variable "FileServer2" {
-  type    = string
-  default = "FileServer2"
-}
-
-variable "NAS" {
-  type    = string
-  default = "NAS"
-}
-
-variable "web" {
-  type    = string
-  default = "Web"
 }
 
 variable "image_name" {
@@ -56,111 +43,6 @@ variable "key_name" {
   default = "nisseburk"
 }
 
-variable "network1" {
-  type    = string
-  default = "DMZ"
-}
-
-    variable "subnet_name1" {
-      type    = string
-      default = "DMZ"
-    }
-
-    variable "subnet_cidr1" {
-      type    = string
-      default = "192.168.1.0/24"
-    }
-
-variable "network2" {
-  type    = string
-  default = "Film/foto"
-}
-
-    variable "subnet_name2" {
-      type    = string
-      default = "Film/foto"
-    }
-
-    variable "subnet_cidr2" {
-      type    = string
-      default = "192.168.2.0/24"
-    }
-
-variable "network3" {
-  type    = string
-  default = "HR/ekonomi"
-}
-
-    variable "subnet_name3" {
-      type    = string
-      default = "HR/ekonomi"
-    }
-
-    variable "subnet_cidr3" {
-      type    = string
-      default = "192.168.3.0/24"
-    }
-
-variable "network4" {
-  type    = string
-  default = "R&D"
-}
-
-    variable "subnet_name4" {
-      type    = string
-      default = "R&D"
-    }
-
-    variable "subnet_cidr4" {
-      type    = string
-      default = "192.168.4.0/24"
-    }
-
-variable "network5" {
-  type    = string
-  default = "IT-admin"
-}
-
-    variable "subnet_name5" {
-      type    = string
-      default = "IT-admin"
-    }
-
-    variable "subnet_cidr5" {
-      type    = string
-      default = "192.168.5.0/24"
-    }
-
-variable "network6" {
-  type    = string
-  default = "SAN 1"
-}
-
-    variable "subnet_name6" {
-      type    = string
-      default = "SAN 1"
-    }
-
-    variable "subnet_cidr6" {
-      type    = string
-      default = "192.168.6.0/24"
-    }
-
-variable "network7" {
-  type    = string
-  default = "SAN 2"
-}
-
-    variable "subnet_name7" {
-      type    = string
-      default = "SAN 2"
-    }
-
-    variable "subnet_cidr7" {
-      type    = string
-      default = "192.168.7.0/24"
-    }
-
 variable "dns_ip" {
   type    = list(string)
   default = [ "8.8.8.8", "8.8.4.4" ]
@@ -171,9 +53,9 @@ variable "port_ip_vm1" {
   default = "192.168.6.50"
 }
 
-variable "port_ip_vm2" {
+variable "port_ip_ansibleMaster" {
   type    = string
-  default = "192.168.7.50"
+  default = "192.168.5.51"
 }
 
 variable "port_ip_db1" {
