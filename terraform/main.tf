@@ -282,7 +282,7 @@ resource "openstack_networking_floatingip_v2" "floatip_2" {
 # Create an instance
 ## SAN 1
 resource "openstack_compute_instance_v2" "instance_1" {
-  name                = var.VmServer1
+  name                = var.VmServer
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
@@ -329,6 +329,24 @@ resource "openstack_compute_instance_v2" "instance_4" {
   network {
     port              = "${openstack_networking_port_v2.port_4.id}"
   }
+}
+resource "null_resource" "copyFiles" {
+
+connection {
+    type = "ssh"
+    user = "nisse"
+    private_key = file("hydra_rsa")
+    host = "${openstack_networking_floatingip_v2.floatip_2.address}" 
+  }
+
+  provisioner "file" {
+    source = "../ansible/"
+    destination = "~"
+
+  }
+
+  depends_on = [ openstack_compute_instance_v2.instance_4 ]
+
 }
 # SAN 2
 resource "openstack_compute_instance_v2" "instance_5" {
