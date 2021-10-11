@@ -68,7 +68,7 @@ resource "openstack_compute_secgroup_v2" "secgroup_2" {
   for_each = var.instances
 
   name           = each.key
-  network_id     = "${openstack_networking_network_v2.network[each.value[1]]}"
+  network_id     = "${openstack_networking_network_v2.network[each.value[1]].id}"
   admin_state_up = "true"
   security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
   
@@ -78,98 +78,7 @@ resource "openstack_compute_secgroup_v2" "secgroup_2" {
   }
  }
 
- resource "openstack_networking_port_v2" "port_1" {
-  name                = "port_1"
-  network_id          = "${openstack_networking_network_v2.network["SAN1"].id}"
-  admin_state_up      = "true"
-  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
 
-  fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnets["SAN1"].id}"
-    ip_address        = var.instances["VmServer"]
-  }
-}
-
-resource "openstack_networking_port_v2" "port_2" {
-  name                = "port_2"
-  network_id          = "${openstack_networking_network_v2.network["SAN1"].id}"
-  admin_state_up      = "true"
-  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
-
-  fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnets["SAN1"].id}"
-    ip_address        = var.instances["DbServer1"]
-  }
-}
-resource "openstack_networking_port_v2" "port_3" {
-  name                = "port_3"
-  network_id          = "${openstack_networking_network_v2.network["SAN1"].id}"
-  admin_state_up      = "true"
-  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
-
-  fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnets["SAN1"].id}"
-    ip_address        = var.instances["FileServer1"]
-  }
-}
-## SAN 2 network
-resource "openstack_networking_port_v2" "port_4" {
-  name                = "port_4"
-  network_id          = "${openstack_networking_network_v2.network["IT-admin"].id}"
-  admin_state_up      = "true"
-  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
-
-  fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnets["IT-admin"].id}"
-    ip_address        = var.instances["AnsibleMaster"]
-  }
-}
-resource "openstack_networking_port_v2" "port_5" {
-  name                = "port_5"
-  network_id          = "${openstack_networking_network_v2.network["SAN2"].id}"
-  admin_state_up      = "true"
-  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
-
-  fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnets["SAN2"].id}"
-    ip_address        = var.instances["DbServer2"]
-  }
-}
-resource "openstack_networking_port_v2" "port_6" {
-  name                = "port_6"
-  network_id          = "${openstack_networking_network_v2.network["SAN2"].id}"
-  admin_state_up      = "true"
-  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
-
-  fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnets["SAN2"].id}"
-    ip_address        = var.instances["FileServer2"]
-  }
-}
-## admin network
-resource "openstack_networking_port_v2" "NAS" {
-  name                = "port_7"
-  network_id          = "${openstack_networking_network_v2.network["IT-admin"].id}"
-  admin_state_up      = "true"
-  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
-
-  fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnets["IT-admin"].id}"
-    ip_address        = var.instances["NAS"]
-  }
-}
-## dmz network
-resource "openstack_networking_port_v2" "web" {
-  name                = "port_8"
-  network_id          = "${openstack_networking_network_v2.network["DMZ"].id}"
-  admin_state_up      = "true"
-  security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
-
-  fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnets["DMZ"].id}"
-    ip_address        = var.instances["web"]
-  }
-}
 # Connect the subnet to the router
 resource "openstack_networking_router_interface_v2" "router_interface_1" {
   router_id           = var.router_id

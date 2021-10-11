@@ -6,27 +6,27 @@
 variable "instances" {
 type      = map(list(string))
 default = {
-    "VmServer" = ["192.168.6.50", "SAN1"],
+    "VmServer"      = ["192.168.6.50", "SAN1"],
     "AnsibleMaster" = ["192.168.5.51", "IT-admin"],
-    "DbServer1" = ["192.168.6.51", "SAN1"],
-    "DbServer2" = ["192.168.7.50", "SAN2"],
-    "FileServer1" = ["192.168.6.52", "SAN1"],
-    "FileServer2" = ["192.168.7.51", "SAN2"],
-    "NAS" = ["192.168.5.50", "IT-admin"],
-    "web" = ["192.168.1.50", "DMZ"]
+    "DbServer1"     = ["192.168.6.51", "SAN1"],
+    "DbServer2"     = ["192.168.7.50", "SAN2"],
+    "FileServer1"   = ["192.168.6.52", "SAN1"],
+    "FileServer2"   = ["192.168.7.51", "SAN2"],
+    "NAS"           = ["192.168.5.50", "IT-admin"],
+    "web"           = ["192.168.1.50", "DMZ"]
   }
 }
 
 variable "networks" {
 type = map(string)
 default = {
-"DMZ" = "192.168.1.0/24",
-"Film/foto" = "192.168.2.0/24",
+"DMZ"        = "192.168.1.0/24",
+"Film/foto"  = "192.168.2.0/24",
 "HR/ekonomi" = "192.168.3.0/24",
-"R&D" = "192.168.4.0/24",
-"IT-admin" = "192.168.5.0/24",
-"SAN1" = "192.168.6.0/24",
-"SAN2" = "192.168.7.0/24",
+"R&D"        = "192.168.4.0/24",
+"IT-admin"   = "192.168.5.0/24",
+"SAN1"       = "192.168.6.0/24",
+"SAN2"       = "192.168.7.0/24",
 }
 }
 
@@ -52,7 +52,7 @@ variable "dns_ip" {
 
 variable "router_id" {
   type    = string
-  default = "e3ee40b5-7707-4634-a725-144e81545c31"
+  default = "a44aee96-bc0c-4a6f-bf2c-e3007444428f"
 }
 
 variable "fip_pool" {
