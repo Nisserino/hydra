@@ -12,3 +12,10 @@
 192.168.7.50
 [FileServer2]
 192.168.7.51
+
+[SAN1:children]
+DbServer1
+FsServer1
+[SAN2:children]
+DbServer2
+FsServer2
