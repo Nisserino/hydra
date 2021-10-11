@@ -11,8 +11,8 @@ To make troubleshooting easier we made /24 networks, one for each department/rel
 
 ### Ip-ranges
 We also set some rules for what different ip addresses _should_ mean.
-> 192.168.x.1 - 192.168.x.49: network units
-> 192.168.x.50 - 192.168.x.99: servers
+> 192.168.x.1 - 192.168.x.49: network units  
+> 192.168.x.50 - 192.168.x.99: servers  
 > 192.168.x.100 - 192.168.x.254: clients
   
 This setup makes it easy to get a quick idea of what an ipadress means when reading logs.
