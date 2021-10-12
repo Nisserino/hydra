@@ -1,4 +1,4 @@
-#first create the volume directories `sudo mkdir <FOLDER-NAME`. Such as html, config, apps etc...
+#First run "docker_network_init.sh" and "nextcloud_host_mkdir.sh"
 
 version: '3' 
 
@@ -14,9 +14,9 @@ services:
         ipv4_address: 172.20.0.4
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=nextcloud
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
     restart: unless-stopped
     ports:
       - 3306:3306
