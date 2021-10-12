@@ -18,7 +18,7 @@
       script:
         cmd: /home/nisse/scripts/iptablesDB2.sh
 
- hosts: FileServer1
+- hosts: FileServer1
   remote_user: nisse
   tasks:
     - name: Fs1 iptables
@@ -27,7 +27,7 @@
       script:
         cmd: /home/nisse/scripts/iptablesFS1.sh
 
- hosts: FileServer2
+- hosts: FileServer2
   remote_user: nisse
   tasks:
     - name: Fs2 iptables
@@ -36,7 +36,7 @@
       script:
         cmd: /home/nisse/scripts/iptablesFS2.sh
 
- hosts: NAS
+- hosts: NAS
   remote_user: nisse
   tasks:
     - name: NAS iptables
@@ -45,7 +45,7 @@
       script:
         cmd: /home/nisse/scripts/iptablesNAS.sh
 
- hosts: VmServer
+- hosts: VmServer
   remote_user: nisse
   tasks:
     - name: VmServer iptables
@@ -54,7 +54,7 @@
       script:
         cmd: /home/nisse/scripts/iptablesVM.sh
 
- hosts: Web
+- hosts: Web
   remote_user: nisse
   tasks:
     - name: Web iptables
