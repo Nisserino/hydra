@@ -6,7 +6,7 @@ occ app:install richdocuments \)
 
 for CMD in "${NEXTCLOUD_CMD[@]}"
 do
-  docker exec --user www-data nextcloud-app php occ $CMD
+  docker exec --user www-data nextcloud-app php $CMD
 done
 
 
