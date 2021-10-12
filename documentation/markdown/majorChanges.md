@@ -15,13 +15,10 @@ We also set some rules for what different ip addresses _should_ mean.
 > 192.168.x.50 - 192.168.x.99: servers  
 > 192.168.x.100 - 192.168.x.254: clients
   
-This setup makes it easy to get a quick idea of what an ipadress means when reading logs.
-ie. if you see that a request from an adress with the addres 192.168.x.51, you know straight away it's a server.  
-Or if you see an adress with the adress 192.168.x.149, you know it's a client.
+This setup makes it easy to identify device based on the ip address when inspecting logs during troubleshooting  
   
 The only downside with this is that every adress from 1-99 has to be set manually, and the dhcp sets the clients ipadresses.
   
-
 If you want to know which department a request came from, or is going to,
 _x_ in the example will tell you what to look up in the documentation.
   
