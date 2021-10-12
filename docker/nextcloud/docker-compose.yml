@@ -6,6 +6,7 @@ services:
   nextclouddb:
     image: mariadb
     container_name: nextcloud-mariadb
+    command: --skip-innodb-read-only-compressed #fixes https://github.com/nextcloud/docker/issues/1536
     volumes:
       - nextcloud-mysql:/var/lib/mysql
       - /etc/localtime:/etc/localtime:ro
@@ -34,7 +35,7 @@ services:
       - username=${COLLABORA_USERNAME}
       - password=${COLLABORA_PASSWORD}
       - domain=${COLLABORA_DOMAIN}
-      - extra_params=extra_params=–o:ssl.enable=false --o:ssl.termination=true
+      - extra_params=extra_params=–o:ssl.enable=false
     ports:
       - 9980:9980
   

@@ -1,6 +1,8 @@
 #!/bin/bash
 #mkdir for nextcloud docker
-nextcloud_dir=($HOME/nextcloud/data/html \
+nextcloud_dir=($HOME/nextcloud \
+	$HOME/nextcloud/data \
+	$HOME/nextcloud/data/html \
 	$HOME/nextcloud/data/config \
 	$HOME/nextcloud/data/apps \
 	$HOME/nextcloud/data/data \
