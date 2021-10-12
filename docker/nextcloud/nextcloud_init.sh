@@ -1,7 +1,16 @@
-#apps
-occ app:install calendar
-occ app:install apporder
-occ app:install richdocuments #collabora online (office 365 equvelent)
+#!/bin/bash
+
+NEXTCLOUD_CMD=(occ app:install calendar \
+occ app:install apporder \
+occ app:install richdocuments \)
+
+for CMD in "${NEXTCLOUD_CMD[@]}"
+do
+  docker exec --user www-data nextcloud-app php occ $CMD
+done
+
+
+#collabora online (office 365 equvelent)
 
 
 #groups
