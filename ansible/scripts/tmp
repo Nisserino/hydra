@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# fix for 'temporary problem with name resolution'
+echo "127.0.0.1 $(cat /etc/hostname)" >> /etc/hosts
+
+# webserver rules
+iptables -A INPUT -i ens3 -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o ens3 -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
+
+iptables -A INPUT -i ens3 -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o ens3 -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
+
+# good to have??
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+# Try to accept apt and other
+iptables -A OUTPUT -p tcp --dport 443 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -p tcp --dport 53 -m state --state NEW -j ACCEPT
+iptables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT
+
+# Accept loopback
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -i lo -j ACCEPT
+
+# accept DNS
+iptables -A INPUT -s 8.8.8.8 -j ACCEPT
+iptables -A OUTPUT -s 8.8.8.8 -j ACCEPT
+iptables -A INPUT -s 8.8.4.4 -j ACCEPT
+iptables -A OUTPUT -s 8.8.4.4 -j ACCEPT
+
+# ssh from my ip
+iptables -A INPUT -i ens3 -m tcp -p tcp -s 90.229.245.181/32 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -i ens3 -m tcp -p tcp -d 90.229.245.181/32 --sport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# ssh from lan
+iptables -A INPUT -i ens3 -m tcp -p tcp -s 192.168.0.0/16 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+iptables -A OUTPUT -o ens3 -m tcp -p tcp -d 192.168.0.0/16 --sport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+
+# drop everything else
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+
