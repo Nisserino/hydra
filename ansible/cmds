@@ -1,1 +1,1 @@
-ansible -i <hostfile> playbook.yml
+ansible-playbook -i <hostfile> playbook.yml
