@@ -1,10 +1,64 @@
 ---
-- hosts: all
-  become: true
 
+- hosts: DbServer1
+  remote_user: nisse
   tasks:
-    - name: Update apt
-    apt: update_cache=yes
+  - name: db1 iptables
+    become: yes
+    become_method: sudo
+    script:
+      cmd: /home/nisse/scripts/iptablesDB1.sh
 
-- hosts: SAN1
+- hosts: DbServer2
+  remote_user: nisse
+  tasks:
+    - name: Db2 iptables
+      become: yes
+      become_method: sudo
+      script:
+        cmd: /home/nisse/scripts/iptablesDB2.sh
 
+ hosts: FileServer1
+  remote_user: nisse
+  tasks:
+    - name: Fs1 iptables
+      become: yes
+      become_method: sudo
+      script:
+        cmd: /home/nisse/scripts/iptablesFS1.sh
+
+ hosts: FileServer2
+  remote_user: nisse
+  tasks:
+    - name: Fs2 iptables
+      become: yes
+      become_method: sudo
+      script:
+        cmd: /home/nisse/scripts/iptablesFS2.sh
+
+ hosts: NAS
+  remote_user: nisse
+  tasks:
+    - name: NAS iptables
+      become: yes
+      become_method: sudo
+      script:
+        cmd: /home/nisse/scripts/iptablesNAS.sh
+
+ hosts: VmServer
+  remote_user: nisse
+  tasks:
+    - name: VmServer iptables
+      become: yes
+      become_method: sudo
+      script:
+        cmd: /home/nisse/scripts/iptablesVM.sh
+
+ hosts: Web
+  remote_user: nisse
+  tasks:
+    - name: Web iptables
+      become: yes
+      become_method: sudo
+      script:
+        cmd: /home/nisse/scripts/iptablesWeb.sh
