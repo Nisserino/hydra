@@ -1,6 +1,8 @@
 #apps
 occ app:install calendar
 occ app:install apporder
+occ app:install richdocuments #collabora online (office 365 equvelent)
+
 
 #groups
 #occ group:add [--display-name DISPLAY-NAME] [--] <groupid>

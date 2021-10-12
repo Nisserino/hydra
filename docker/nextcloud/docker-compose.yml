@@ -1,21 +1,99 @@
-version: "3.7"
+#first create the volume directories `sudo mkdir <FOLDER-NAME`. Such as html, config, apps etc...
+
+version: '3' 
 
 services:
-
-  nextcloud:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  nextclouddb:
+    image: mariadb
+    container_name: nextcloud-mariadb
     volumes:
-      - "./nextcloud:/var/www/html"
-      - "./apps:/var/www/html/custom_apps"
-      - "./config:/var/www/html/config"
-      - "./data:/var/www/html/data"
+      - nextcloud-mysql:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      default:
+        ipv4_address: 172.20.0.4
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    restart: unless-stopped
     ports:
-      - "8080:80"
-    expose:
-      - "80"
+      - 3306:3306
 
-#networks:
-#  nextcloud:
+  nextcloudoffice:
+    image: collabora/code:latest
+    container_name: nextcloud-office
+    volumes:
+      - nextcloud-collabora:/config
+    networks:
+      default:
+        ipv4_address: 172.20.0.5
+    restart: unless-stopped
+    environment:
+      - username=${COLLABORA_USERNAME}
+      - password=${COLLABORA_PASSWORD}
+      - domain=${COLLABORA_DOMAIN}
+      - extra_params=extra_params=–o:ssl.enable=false --o:ssl.termination=true
+    ports:
+      - 9980:9980
+  
+  nextcloudapp:
+    image: nextcloud:latest
+    container_name: nextcloud-app
+    networks:
+      default:
+        ipv4_address: 172.20.0.6
+    volumes:
+      - nextcloud-html:/var/www/html
+      - nextcloud-config:/var/www/html/config
+      - nextcloud-apps:/var/www/html/custom_apps
+      - nextcloud-data:/var/www/html/data
+      - nextcloud-themes:/var/www/html/themes
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8080:80
+    restart: unless-stopped
 
+volumes:
+  nextcloud-html:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/html
+           o: bind
+  nextcloud-config:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/config
+           o: bind
+  nextcloud-apps:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/apps
+           o: bind
+  nextcloud-data:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/data
+           o: bind
+  nextcloud-themes:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/themes
+           o: bind
+  nextcloud-mysql:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/mysql
+           o: bind
+  nextcloud-collabora:
+         driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/collabora
+           o: bind
+networks:
+  default:
+    external:
+      name: dockernet
+
+#https://cyberhost.uk/nextcloud-install-docker/
