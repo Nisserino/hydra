@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.6)  13 OCT 2021 21:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.10.6)  13 OCT 2021 22:26
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -411,7 +411,11 @@ ted.
 
 
 (./template.markdown.out
-(./_markdown_template/58289a4b759d268a4b5eb01dfe6390ba.md.tex
+(./_markdown_template/41f769a2529315e6fdcf0e51f91f746e.md.tex
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 2.
+
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `\char' on input line 14.
@@ -478,7 +482,7 @@ ted.
 
 
 (./template.markdown.out
-(./_markdown_template/a5ea9006385ee79eabed85e70314254f.md.tex [3]))
+(./_markdown_template/a11e03a8154e4a80f9990cdd540f9965.md.tex [3]))
 Package markdown Info: Including markdown document "markdown/services.md" on in
 put line 59.
 \openout5 = `template.markdown.lua'.
@@ -531,12 +535,12 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 62.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 62.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 62.
 Package rerunfilecheck Info: File `template.out' has not changed.
-(rerunfilecheck)             Checksum: B6F6D62B6C2830D7207737C3F9829C35;2873.
+(rerunfilecheck)             Checksum: 4830BAA1E8528C8D73FD961249867291;3003.
  ) 
 Here is how much of TeX's memory you used:
  8314 strings out of 481239
- 145484 string characters out of 5920377
- 409226 words of memory out of 5000000
+ 145574 string characters out of 5920377
+ 409229 words of memory out of 5000000
  23324 multiletter control sequences out of 15000+600000
  538021 words of font info for 43 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -550,7 +554,7 @@ fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmtt10.pfb>
-Output written on template.pdf (6 pages, 138838 bytes).
+Output written on template.pdf (6 pages, 139909 bytes).
 PDF statistics:
  332 PDF objects out of 1000 (max. 8388607)
  311 compressed objects within 4 object streams
