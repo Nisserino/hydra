@@ -1,6 +1,9 @@
 #!/bin/bash
 #mkdir for nextcloud docker
-mkdir -p $HOME/nextcloud/data \
+mkdir -p $HOME/nginx/data \
+	$HOME/nginx/data/html \
+	$HOME/nginx/data/certs \
+	$HOME/nextcloud/data \
 	$HOME/nextcloud/data/html \
 	$HOME/nextcloud/data/config \
 	$HOME/nextcloud/data/apps \

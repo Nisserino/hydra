@@ -3,40 +3,40 @@
 version: '3' 
 
 services: 
-  nginxproxy:
-    image: jwilder/nginx-proxy:alpine
-    labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
-    container_name: nginx-proxy
-    networks:
-      default:
-        ipv4_address: 172.20.0.2
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - nginx-conf-d:/etc/nginx/conf.d:rw
-      - nginx-vhost-d:/etc/nginx/vhost.d:rw
-      - nginx-html:/usr/share/nginx/html:rw
-      - nginx-certs:/etc/nginx/certs:ro
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-    restart: unless-stopped
-  nginxletsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: nginx-letsencrypt
-    depends_on:
-      - nginxproxy
-    networks:
-      default:
-        ipv4_address: 172.20.0.3
-    volumes:
-      - nginx-vhost-d:/etc/nginx/vhost.d:rw
-      - nginx-html:/usr/share/nginx/html:rw
-      - nginx-certs:/etc/nginx/certs:rw
-      - /etc/localtime:/etc/localtime:ro
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    restart: unless-stopped
+#  nginxproxy:
+#    image: jwilder/nginx-proxy:alpine
+#    labels:
+#      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true"
+#    container_name: nginx-proxy
+#    networks:
+#      default:
+#        ipv4_address: 172.20.0.2
+#    ports:
+#      - 80:80
+#      - 443:443
+#    volumes:
+#      - nginx-conf-d:/etc/nginx/conf.d:rw
+#      - nginx-vhost-d:/etc/nginx/vhost.d:rw
+#      - nginx-html:/usr/share/nginx/html:rw
+#      - nginx-certs:/etc/nginx/certs:ro
+#      - /etc/localtime:/etc/localtime:ro
+#      - /var/run/docker.sock:/tmp/docker.sock:ro
+#    restart: unless-stopped
+#  nginxletsencrypt:
+#    image: jrcs/letsencrypt-nginx-proxy-companion
+#    container_name: nginx-letsencrypt
+#    depends_on:
+#      - nginxproxy
+#    networks:
+#      default:
+#        ipv4_address: 172.20.0.3
+#    volumes:
+#      - nginx-vhost-d:/etc/nginx/vhost.d:rw
+#      - nginx-html:/usr/share/nginx/html:rw
+#      - nginx-certs:/etc/nginx/certs:rw
+#      - /etc/localtime:/etc/localtime:ro
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#    restart: unless-stopped
   nextclouddb:
     image: mariadb
     container_name: nextcloud-mariadb
@@ -109,26 +109,26 @@ services:
       - 8096:8096
 
 volumes:
-  nginx-conf-d:
-    driver_opts:
-           type: none
-           device: $HOME/nginx/data/conf.d
-           o: bind
-  nginx-vhost-d:
-    driver_opts:
-           type: none
-           device: $HOME/nginx/data/vhost.d
-           o: bind
-  nginx-html:
-    driver_opts:
-           type: none
-           device: $HOME/nginx/data/html
-           o: bind
-  nginx-certs:
-    driver_opts:
-           type: none
-           device: $HOME/nginx/data/certs
-           o: bind
+#  nginx-conf-d:
+#    driver_opts:
+#           type: none
+#           device: $HOME/nginx/data/conf.d
+#           o: bind
+#  nginx-vhost-d:
+#    driver_opts:
+#           type: none
+#           device: $HOME/nginx/data/vhost.d
+#           o: bind
+#  nginx-html:
+#    driver_opts:
+#           type: none
+#           device: $HOME/nginx/data/html
+#           o: bind
+#  nginx-certs:
+#    driver_opts:
+#           type: none
+#           device: $HOME/nginx/data/certs
+#           o: bind
   nextcloud-html:
      driver_opts:
            type: none
