@@ -1,0 +1,140 @@
+#First run "docker_network_init.sh" and "nextcloud_host_mkdir.sh"
+
+version: '3' 
+
+services:
+  nextclouddb:
+    image: mariadb
+    container_name: nextcloud-mariadb
+    command: --skip-innodb-read-only-compressed #fixes https://github.com/nextcloud/docker/issues/1536
+    volumes:
+      - nextcloud-mysql:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      default:
+        ipv4_address: 172.20.0.4
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=nextcloud
+    restart: unless-stopped
+    ports:
+      - 3306:3306
+
+  nextcloudoffice:
+    image: collabora/code:latest
+    container_name: nextcloud-office
+    volumes:
+      - nextcloud-collabora:/config
+    networks:
+      default:
+        ipv4_address: 172.20.0.5
+    restart: unless-stopped
+    environment:
+      - username=${COLLABORA_USERNAME}
+      - password=${COLLABORA_PASSWORD}
+      - domain=${COLLABORA_DOMAIN}
+      - extra_params=extra_params=–o:ssl.enable=false
+    ports:
+      - 9980:9980
+  
+  nextcloudapp:
+    image: nextcloud:latest
+    container_name: nextcloud-app
+    networks:
+      default:
+        ipv4_address: 172.20.0.6
+    volumes:
+      - nextcloud-html:/var/www/html
+      - nextcloud-config:/var/www/html/config
+      - nextcloud-apps:/var/www/html/custom_apps
+      - nextcloud-data:/var/www/html/data
+      - nextcloud-themes:/var/www/html/themes
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 8080:80
+    restart: unless-stopped
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    user: uid:gid
+    networks:
+      default:
+        ipv4_address: 172.20.0.7
+    volumes:
+      - jellyfin-config:/config
+      - jellyfin-cache:/cache
+      - jellyfin-media:/media
+      - jellyfinmedia2:/media2:ro
+    restart: unless-stopped
+    ports:
+      - 8096:8096
+
+volumes:
+  nextcloud-html:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/html
+           o: bind
+  nextcloud-config:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/config
+           o: bind
+  nextcloud-apps:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/apps
+           o: bind
+  nextcloud-data:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/data
+           o: bind
+  nextcloud-themes:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/themes
+           o: bind
+  nextcloud-mysql:
+     driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/mysql
+           o: bind
+  nextcloud-collabora:
+         driver_opts:
+           type: none
+           device: $HOME/nextcloud/data/collabora
+           o: bind
+  jellyfin-config:
+         driver_opts:
+           type: none
+           device: $HOME/jellyfin/data/config
+           o: bind
+  jellyfin-cache:
+         driver_opts:
+           type: none
+           device: $HOME/jellyfin/data/cache
+           o: bind
+  jellyfin-media:
+         driver_opts:
+           type: none
+           device: $HOME/jellyfin/data/media
+           o: bind
+  jellyfin-media2:
+         driver_opts:
+           type: none
+           device: $HOME/jellyfin/data/media2
+           o: bind
+
+
+
+
+networks:
+  default:
+    external:
+      name: dockernet
+
+#https://cyberhost.uk/nextcloud-install-docker/ https://jellyfin.org/docs/general/administration/installing.html
