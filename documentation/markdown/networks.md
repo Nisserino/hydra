@@ -1,27 +1,27 @@
 # Networks
 
-## DMZ
+### DMZ
 >192.168.1.0/24
 
-## Film/foto
+### Film/foto
 >192.168.2.0/24
 
-## HR/ekonomi
+### HR/ekonomi
 >192.168.3.0/24
 
-## R&D
+### R&D
 >192.168.4.0/24
 
-## IT-admin
+### IT-admin
 >192.168.5.0/24
 
-## SAN 1
+### SAN 1
 >192.168.6.0/24
 
-## SAN 2
+### SAN 2
 >192.168.7.0/24
 
-# DNS 
+## DNS 
 
-## Google
->8.8.8.8 alt 8.8.4.4
+### Google
+> 8.8.8.8 alt 8.8.4.4
