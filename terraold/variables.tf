@@ -254,6 +254,7 @@ system_info:
     name: nisse
 packages:
  - docker
+ - docker-compose
 EOF
 }
 

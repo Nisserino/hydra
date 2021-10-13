@@ -287,7 +287,7 @@ resource "openstack_compute_instance_v2" "instance_1" {
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
   security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
-  user_data           = var.cloudconfig_web
+  user_data           = var.cloudconfig_VmServer
 
   network {
     port              = "${openstack_networking_port_v2.port_1.id}"
