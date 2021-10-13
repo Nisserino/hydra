@@ -1,0 +1,26 @@
+---
+
+# Fix script names and usernames
+
+# iptables base config
+- hosts: VmServer
+  remote_user: nisse
+  tasks:
+    - name: make dirs
+      script:
+        cmd: /home/nisse/scripts/docker/docker_mkdir.sh
+
+    - name: copy Docker Compose files
+      copy:
+        src: /home/nisse/scripts/docker/{{ item }}
+        dest: /home/nisse/{{ item }}
+      loop:
+      - docker-compose.yml
+
+    - name: deploy Docker Compose stack
+      become: yes
+      become_method: sudo
+      docker_compose:
+        project_src: /home/nisse
+        files:
+        - docker-compose.yml
