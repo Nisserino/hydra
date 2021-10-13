@@ -59,7 +59,9 @@ services:
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
-    user: uid:gid
+    environment:
+      - PUID=1000
+      - PGID=1000
     networks:
       default:
         ipv4_address: 172.20.0.7
@@ -67,7 +69,7 @@ services:
       - jellyfin-config:/config
       - jellyfin-cache:/cache
       - jellyfin-media:/media
-      - jellyfinmedia2:/media2:ro
+      - jellyfin-media2:/media2:ro
     restart: unless-stopped
     ports:
       - 8096:8096
