@@ -13,9 +13,9 @@ Allow port 22 from 192.168.0.0/16
 Allow port 22 from 91.229.245.181
 
 ## DatabaseGroup
-Allow port ? from 192.168.0.0/16 ?
+Allow port 3306 from 192.168.0.0/16
 
 ## FileserverGroup
-Allow port ? from 192.168.0.0/16 ?
+Allow port 3306 from 192.168.0.0/16
 
 
