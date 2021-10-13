@@ -1,0 +1,11 @@
+---
+
+- hosts: VmServer
+  remote_user: nisse
+  tasks:
+    - name: Make the docker network
+      become: yes
+      become_method: sudo
+      script:
+        cmd: /home/nisse/scripts/docker/docker_network_init.sh
+

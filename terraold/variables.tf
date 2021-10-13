@@ -1,9 +1,9 @@
 ## VARIABLES
 # Make changes here
 
-variable "VmServer1" {
+variable "VmServer" {
   type    = string
-  default = "VmServer1"
+  default = "VmServer"
 }
 
 variable "AnsibleMaster" {
@@ -53,7 +53,7 @@ variable "flavor_name" {
 
 variable "key_name" {
   type    = string
-  default = "nisseburk"
+  default = "Nietzsche"
 }
 
 variable "network1" {
@@ -183,7 +183,7 @@ variable "port_ip_db1" {
 
 variable "port_ip_db2" {
   type    = string
-  default = "192.168.7.51"
+  default = "192.168.7.50"
 }
 
 variable "port_ip_fs1" {
@@ -193,7 +193,7 @@ variable "port_ip_fs1" {
 
 variable "port_ip_fs2" {
   type    = string
-  default = "192.168.7.52"
+  default = "192.168.7.51"
 }
 
 variable "port_ip_nas" {
@@ -232,3 +232,29 @@ packages:
  - nginx
 EOF
 }
+
+variable "cloudconfig_AnsibleMaster" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: nisse
+packages:
+ - ansible
+EOF
+}
+
+variable "cloudconfig_VmServer" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: nisse
+packages:
+ - docker
+ - docker-compose
+EOF
+}
+

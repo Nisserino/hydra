@@ -128,9 +128,10 @@ resource "openstack_compute_secgroup_v2" "secgroup_1" {
   }
 }
 
+
 resource "openstack_compute_secgroup_v2" "secgroup_2" {
   name                = "TerraformSSH"
-  description         = "Terraform SH for Port 22"
+  description         = "Terraform SSH for Port 22"
 
   rule {
     from_port         = 22
@@ -139,6 +140,59 @@ resource "openstack_compute_secgroup_v2" "secgroup_2" {
     cidr              = "0.0.0.0/0" # only for demo purposes, tighten up in live scenario
   }
 }
+
+
+resource "openstack_compute_secgroup_v2" "secgroup_3" {
+   name                = "TerraformDB"
+   description         = "Terraform DB for Port 3306"
+
+   rule {
+     from_port         = 3306
+     to_port           = 3306
+     ip_protocol       = "tcp"
+     cidr              = "192.168.0.0/16"
+   }
+}
+
+
+resource "openstack_compute_secgroup_v2" "secgroup_4" {
+   name                = "TerraformFS"
+   description         = "Terraform FS for Port 445"
+
+   rule {
+     from_port         = 445
+     to_port           = 445
+     ip_protocol       = "tcp"
+     cidr              = "192.168.0.0/16"
+   }
+ }
+
+
+resource "openstack_compute_secgroup_v2" "secgroup_5" {
+    name                = "TerraformVM"
+    description         = "Terraform VM for Port 8080, 8096, 9980"
+
+   
+    rule {
+      from_port         = 8080 
+      to_port           = 8080
+      ip_protocol       = "tcp"
+      cidr              = "0.0.0.0/0" # only for demo purposes, tighten up in live scenario
+    }
+    rule {
+      from_port         = 8096
+      to_port           = 8096
+      ip_protocol       = "tcp"
+      cidr              = "0.0.0.0/0" # only for demo purposes, tighten up in live scenario
+    }
+    rule {
+      from_port         = 9980
+      to_port           = 9980
+      ip_protocol       = "tcp"
+      cidr              = "0.0.0.0/0" # only for demo purposes, tighten up in live scenario
+    }
+  }
+
 
 # Create a port
 ## SAN 1 network
@@ -274,16 +328,20 @@ resource "openstack_networking_floatingip_v2" "floatip_1" {
   pool                = var.fip_pool
 }
 
+resource "openstack_networking_floatingip_v2" "floatip_2" {
+  pool                = var.fip_pool
+}
+
 ## INSTANCE
 # Create an instance
 ## SAN 1
 resource "openstack_compute_instance_v2" "instance_1" {
-  name                = var.VmServer1
+  name                = var.VmServer
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
   security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
-  user_data           = var.cloudconfig_web
+  user_data           = var.cloudconfig_VmServer
 
   network {
     port              = "${openstack_networking_port_v2.port_1.id}"
@@ -320,11 +378,29 @@ resource "openstack_compute_instance_v2" "instance_4" {
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
   security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
-  user_data           = var.cloudconfig_web
+  user_data           = var.cloudconfig_AnsibleMaster
 
   network {
     port              = "${openstack_networking_port_v2.port_4.id}"
   }
+}
+resource "null_resource" "copyFiles" {
+
+connection {
+    type = "ssh"
+    user = "nisse"
+    private_key = file("hydra_rsa")
+    host = "${openstack_networking_floatingip_v2.floatip_2.address}" 
+  }
+
+  provisioner "file" {
+    source = "../ansible/"
+    destination = "~"
+
+  }
+
+  depends_on = [ openstack_compute_instance_v2.instance_4 ]
+
 }
 # SAN 2
 resource "openstack_compute_instance_v2" "instance_5" {
@@ -382,4 +458,8 @@ resource "openstack_compute_instance_v2" "instance_8" {
 resource "openstack_networking_floatingip_associate_v2" "fip_1" {
   floating_ip         = "${openstack_networking_floatingip_v2.floatip_1.address}"
   port_id             = "${openstack_networking_port_v2.port_8.id}"
+}
+resource "openstack_networking_floatingip_associate_v2" "fip_2" {
+  floating_ip         = "${openstack_networking_floatingip_v2.floatip_2.address}"
+  port_id             = "${openstack_networking_port_v2.port_4.id}"
 }

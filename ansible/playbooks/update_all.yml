@@ -1,0 +1,12 @@
+---
+# update all instances
+- hosts: all
+  remote_user: nisse
+  tasks:
+  - name: update
+    become: yes
+    become_method: sudo
+    apt:
+      update_cache: yes
+      upgrade: dist
+
