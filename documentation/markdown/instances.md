@@ -1,7 +1,16 @@
 # Instances
 
-## Default ports
-lo: 22
+## Default network settings
+whitelist:  
+lo: INPUT and OUTPUT  
+90.229.245.181:22 INPUT and OUTPUT  
+LAN:22 INPUT and OUTPUT  
+RELATED,ESTABLISHED INPUT and OUTPUT  
+LAN:80,443 INPUT and OUTPUT  
+LAN:8.8.8.8,8.8.8.4.4 INPUT and OUTPUT
+
+default policys:  
+INPUT, OUTPUT and FORWARD DROP
 
 
 ## Web
