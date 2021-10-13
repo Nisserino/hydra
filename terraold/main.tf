@@ -340,7 +340,7 @@ resource "openstack_compute_instance_v2" "instance_1" {
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
-  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
+  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}","${openstack_compute_secgroup_v2.secgroup_5.name}"]
   user_data           = var.cloudconfig_VmServer
 
   network {
@@ -352,7 +352,7 @@ resource "openstack_compute_instance_v2" "instance_2" {
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
-  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
+  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}","${openstack_compute_secgroup_v2.secgroup_3.name}"]
   user_data           = var.cloudconfig_web
 
   network {
@@ -364,7 +364,7 @@ resource "openstack_compute_instance_v2" "instance_3" {
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
-  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
+  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}","${openstack_compute_secgroup_v2.secgroup_4.name}"]
   user_data           = var.cloudconfig_web
 
   network {
@@ -408,7 +408,7 @@ resource "openstack_compute_instance_v2" "instance_5" {
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
-  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
+  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}","${openstack_compute_secgroup_v2.secgroup_3.name}"]
   user_data           = var.cloudconfig_web
 
   network {
@@ -420,7 +420,7 @@ resource "openstack_compute_instance_v2" "instance_6" {
   image_name          = var.image_name
   flavor_name         = var.flavor_name
   key_pair            = var.key_name
-  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
+  security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}","${openstack_compute_secgroup_v2.secgroup_4.name}"]
   user_data           = var.cloudconfig_web
 
   network {
