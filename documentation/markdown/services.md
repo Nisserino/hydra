@@ -1,4 +1,4 @@
-# Services
+# Docker Services
 
 ## NextCloud
 
@@ -13,15 +13,13 @@ docker/nextcloud/config <?>
 
 ## Jitsi
 > Hostname: VmServer
-> ip: 192.168.6.50 <?>
-> port: <?>
+> ip: 192.168.6.50
+> port: 8089 
 
 ## Matrix-synapse
 > Hostname: VmServer
-> ip: 192.168.6.50 <?>
+> ip: 192.168.6.50
 > port: <?>
 
-## Openvpn (?)
-Run on AnsibleMaster?
-Run at all?
-
+# Other Services
+Do we even have any?
