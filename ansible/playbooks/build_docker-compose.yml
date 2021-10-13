@@ -16,6 +16,7 @@
         dest: /home/nisse/{{ item }}
       loop:
       - docker-compose.yml
+      - .env 
 
     - name: deploy Docker Compose stack
       become: yes
