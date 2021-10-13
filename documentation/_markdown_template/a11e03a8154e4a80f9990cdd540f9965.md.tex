@@ -1,0 +1,53 @@
+\markdownRendererHeadingOne{Instances}\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{Default network settings}\markdownRendererInterblockSeparator
+{}whitelist:\markdownRendererLineBreak
+{}lo: INPUT and OUTPUT\markdownRendererLineBreak
+{}90.229.245.181:22 INPUT and OUTPUT\markdownRendererLineBreak
+{}LAN:22 INPUT and OUTPUT\markdownRendererLineBreak
+{}RELATED,ESTABLISHED INPUT and OUTPUT\markdownRendererLineBreak
+{}LAN:80,443 INPUT and OUTPUT\markdownRendererLineBreak
+{}LAN:8.8.8.8,8.8.8.4.4 INPUT and OUTPUT\markdownRendererInterblockSeparator
+{}default policys:\markdownRendererLineBreak
+{}INPUT, OUTPUT and FORWARD DROP\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{Web}\markdownRendererInterblockSeparator
+{}ip: 192.168.1.50\markdownRendererLineBreak
+{}open ports:\markdownRendererLineBreak
+{}WAN: 80, 443\markdownRendererLineBreak
+{}LAN: 22\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{NAS}\markdownRendererInterblockSeparator
+{}ip: 192.168.5.50\markdownRendererLineBreak
+{}open ports:\markdownRendererLineBreak
+{}LAN: 22 INPUT\markdownRendererLineBreak
+{}(Only open to inside network 192.168.0.0/16)\markdownRendererLineBreak
+{}closed ports:\markdownRendererLineBreak
+{}LAN: INPUT DROPPED\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{AnsibleMaster}\markdownRendererInterblockSeparator
+{}ip: 192.168.5.51 (floating ip: known after build)\markdownRendererLineBreak
+{}open ports:\markdownRendererLineBreak
+{}WAN: 22\markdownRendererLineBreak
+{}(only to specific ip)\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{VmServer}\markdownRendererInterblockSeparator
+{}ip: 192.168.6.50\markdownRendererLineBreak
+{}open ports:\markdownRendererLineBreak
+{}LAN: 3306, 8080, 8096, 9980 INPUT and OUTPUT\markdownRendererLineBreak
+{}(Only open to inside network 192.168.0.0/16)\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{DbServer1}\markdownRendererInterblockSeparator
+{}ip: 192.168.6.51\markdownRendererLineBreak
+{}open ports:\markdownRendererLineBreak
+{}LAN: 3306 INPUT and OUTPUT\markdownRendererLineBreak
+{}(Only open to inside network 192.168.0.0/16)\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{FileServer1}\markdownRendererInterblockSeparator
+{}ip: 192.168.6.51\markdownRendererLineBreak
+{}open ports:\markdownRendererLineBreak
+{}LAN: 445 INPUT and OUTPUT\markdownRendererLineBreak
+{}(Only open to inside network 192.168.0.0/16)\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{DbServer2}\markdownRendererInterblockSeparator
+{}ip: 192.168.7.50\markdownRendererLineBreak
+{}open ports:\markdownRendererLineBreak
+{}LAN: 3306 INPUT and OUTPUT\markdownRendererLineBreak
+{}(Only open to inside network 192.168.0.0/16)\markdownRendererInterblockSeparator
+{}\markdownRendererHeadingTwo{FileServer2}\markdownRendererInterblockSeparator
+{}ip: 192.168.7.51\markdownRendererLineBreak
+{}open ports:\markdownRendererLineBreak
+{}LAN: 445 INPUT and OUTPUT\markdownRendererLineBreak
+{}(Only open to inside network 192.168.0.0/16)\relax
