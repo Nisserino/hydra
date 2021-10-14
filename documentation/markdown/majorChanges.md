@@ -3,7 +3,6 @@
 ## Network
 
 ### Subnet sizes
-<spellcheck>
 Originally the subnets were set with /27 netmasks.  
 We felt this was unneccacarily complicated as it makes it much harder to troubleshoot.
   

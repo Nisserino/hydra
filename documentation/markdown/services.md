@@ -15,7 +15,7 @@
 > $HOME/nextcloud/data/data  
 > $HOME/nextcloud/data/themes  
   
-## MarinaDB
+## MariaDB
 > Hostname: VmServer  
 > ip: 192.168.6.50  
 > port: 3306:3306  
